@@ -7,10 +7,12 @@ import android.os.Handler
 
 class SplashActivity : AppCompatActivity() {
 
+    var handler = Handler()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        Handler().postDelayed({
+        handler.postDelayed({
             val intent = Intent()
             intent.setClass(this, MainActivity::class.java)
             startActivity(intent)
@@ -18,5 +20,10 @@ class SplashActivity : AppCompatActivity() {
             finish()
         }, 1000)
 
+    }
+
+    override fun onDestroy() {
+        handler.removeCallbacksAndMessages(null)
+        super.onDestroy()
     }
 }
